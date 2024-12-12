@@ -1,11 +1,11 @@
 import cv2 as cv
 
 '''
-img = cv.imread("photo/butterfly.jpg")
+img = cv.imread("photos/butterfly.jpg")
 cv.imshow('Butterfly', img)
 cv.waitKey(5000)
 
-img2 = cv.imread("photo/building.jpg")
+img2 = cv.imread("photos/building.jpg")
 cv.imshow('Building', img2)
 cv.waitKey(0)
 '''
