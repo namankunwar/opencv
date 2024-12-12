@@ -1,6 +1,6 @@
 import cv2 as cv
 
-img= cv.imread("photo/building.jpg")
+img= cv.imread("photos/building.jpg")
 
 def rescale(image, scale):
         
@@ -16,10 +16,18 @@ def rescale(image, scale):
         dimensions = (width, height)
         return cv.resize(img, dimensions,interpolation= cv.INTER_AREA)
 
-rescale_image= rescale(img, 0.69)
+rescale_image= rescale(img, 0.5)
 
 resize_image = cv.resize(img, (800,700), interpolation= cv.INTER_LINEAR)
+'''
+cv.INTER_AREA: For shrinking images.
+cv.INTER_LINEAR: For enlarging images.
+cv.INTER_CUBIC: For high-quality enlargements.
+'''
 
 cv.imshow("orginal image", img)
 cv.imshow("rescale image", rescale_image)
-cv.imshow("resize image with 800*700")
+cv.imshow("resize image with 800*700", resize_image)
+
+cv.waitKey(0)
+cv.destroyAllWindows()
