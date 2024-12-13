@@ -1,51 +1,44 @@
 import cv2 as cv
 import numpy as np
 
-# Create two blank (black) images of size 300x300 with single channel (grayscale)
-blank1 = np.zeros((300, 300), dtype="uint8")  # First blank image
-blank2 = np.zeros((300, 300), dtype="uint8")  # Second blank image
-
-# Draw a white rectangle on the first blank image
-rectangle = cv.rectangle(blank1.copy(), (50, 50), (250, 250), 255, -1)
+# Load a BGR image (color image)
+image = cv.imread("photos/sample.jpg")
 # Parameters:
-# - blank1.copy(): Copy of the blank image to draw the rectangle on.
-# - (50, 50): Top-left corner of the rectangle.
-# - (250, 250): Bottom-right corner of the rectangle.
-# - 255: Color of the rectangle (white in grayscale).
-# - -1: Thickness, -1 means the rectangle will be filled.
+# - "photos/sample.jpg": Path to the image file.
+# - Returns an array representation of the image.
 
-# Draw a white circle on the second blank image
-circle = cv.circle(blank2.copy(), (150, 150), 100, 255, -1)
+# Resize the image to 400x400 for uniformity
+resized_img = cv.resize(image, (400, 400), interpolation=cv.INTER_AREA)
 # Parameters:
-# - blank2.copy(): Copy of the blank image to draw the circle on.
-# - (150, 150): Center of the circle.
+# - image: Original image.
+# - (400, 400): Desired dimensions (width, height).
+# - interpolation=cv.INTER_AREA: Resizing technique suitable for shrinking the image.
+
+# Create a circular mask
+mask = np.zeros(resized_img.shape[:2], dtype="uint8")
+# Creates a black image with the same height and width as the resized image but without color channels.
+
+mask = cv.circle(mask, (200, 200), 100, 255, -1)
+# Draws a white circle on the black mask.
+# Parameters:
+# - mask: The black mask image to draw on.
+# - (200, 200): Center of the circle.
 # - 100: Radius of the circle.
 # - 255: Color of the circle (white in grayscale).
 # - -1: Thickness, -1 means the circle will be filled.
 
-# Perform bitwise AND operation
-bitwise_and = cv.bitwise_and(rectangle, circle)
-# Keeps only the overlapping region of the rectangle and circle.
+# Apply the mask to the image using bitwise AND
+masked_image = cv.bitwise_and(resized_img, resized_img, mask=mask)
+# Parameters:
+# - resized_img: Input image.
+# - resized_img: Second input image (same as the first).
+# - mask=mask: Applies the circular mask to the input image.
+# Only the area of the image inside the white circle will be retained.
 
-# Perform bitwise OR operation
-bitwise_or = cv.bitwise_or(rectangle, circle)
-# Combines all white regions from both the rectangle and circle.
-
-# Perform bitwise XOR operation
-bitwise_xor = cv.bitwise_xor(rectangle, circle)
-# Highlights only the non-overlapping regions of the rectangle and circle.
-
-# Perform bitwise NOT operation on the rectangle
-bitwise_not_rect = cv.bitwise_not(rectangle)
-# Inverts the colors of the rectangle (black becomes white and vice versa).
-
-# Display the original shapes and the results of the bitwise operations
-cv.imshow("Rectangle", rectangle)          # Displays the rectangle
-cv.imshow("Circle", circle)                # Displays the circle
-cv.imshow("Bitwise AND", bitwise_and)      # Displays the result of AND
-cv.imshow("Bitwise OR", bitwise_or)        # Displays the result of OR
-cv.imshow("Bitwise XOR", bitwise_xor)      # Displays the result of XOR
-cv.imshow("Bitwise NOT (Rectangle)", bitwise_not_rect)  # Displays the result of NOT
+# Display the results
+cv.imshow("Original Image", resized_img)  # Displays the resized original image
+cv.imshow("Mask", mask)                   # Displays the circular mask
+cv.imshow("Masked Image", masked_image)   # Displays the image with the mask applied
 
 cv.waitKey(0)  # Waits indefinitely until a key is pressed
 cv.destroyAllWindows()  # Closes all OpenCV windows
