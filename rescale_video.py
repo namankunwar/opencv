@@ -42,4 +42,3 @@ while True:
 # Release resources and close windows
 vd.release()
 cv.destroyAllWindows()
-

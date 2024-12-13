@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 
 # Load a BGR image (color image)
-image = cv.imread("photos/sample.jpg")
+image = cv.imread("photos/blank.jpg")
 # Parameters:
 # - "photos/sample.jpg": Path to the image file.
 # - Returns an array representation of the image.

@@ -8,16 +8,16 @@ blank = np.zeros(resize_img.shape, dtype="uint8")
 
 blur= cv.GaussianBlur(resize_img, (9,9), cv.BORDER_DEFAULT)
 
-canny = cv.Canny(blur, 135, 155)
+#canny = cv.Canny(blur, 135, 155)
 
 # Load image in grayscale
 gray_img = cv.cvtColor(resize_img, cv.COLOR_BGR2GRAY)
 
 # Apply binary threshold to convert the image into a binary image
-#ret, threshold = cv.threshold(gray_img, 180, 255, cv.THRESH_BINARY)
+ret, threshold = cv.threshold(gray_img, 180, 255, cv.THRESH_BINARY)
 
 # Find contours in the binary image
-contour, heirachy = cv.findContours(canny, cv.RETR_LIST, cv.CHAIN_APPROX_NONE)
+contour, heirachy = cv.findContours(threshold, cv.RETR_LIST, cv.CHAIN_APPROX_NONE)
 print(f"{len(contour)} founded")
 
 #cv.imshow("canny", canny)

@@ -17,9 +17,21 @@ dummy = np.zeros((500,500,3), dtype="uint8")
 
 cv.rectangle(dummy, (0,100),(dummy.shape[1]//2, dummy.shape[0]//2),(255,0,0), thickness= cv.FILLED) 
 cv.imshow("dum",dummy)
+''' 
+Parameters:
+
+dummy: The target image.
+(0, 100): Coordinates of the top-left corner.
+(dummy.shape[1]//2, dummy.shape[0]//2):
+Uses half the image's width (dummy.shape[1]) and height (dummy.shape[0]) for the bottom-right corner.
+This ensures the rectangle is drawn relative to the image size.
+(255, 0, 0): Rectangle color (Blue in BGR).
+thickness=cv.FILLED:
+Fills the rectangle entirely with the specified color.
+'''
 
 #draw a circle
-cv.circle(dummy, (150,150),30, (0,0,255), thickness= 3)
+cv.circle(dummy, (150,150), 30, (0,0,255), thickness= -1)
 cv.imshow("dum", dummy)
 
 #draw a white line
@@ -28,7 +40,7 @@ cv.imshow("dum", dummy)
 
 
 #write text in image
-cv.putText(dummy, text="hello bro !",org=(0,100), fontFace=1, fontScale=3, color=(0,124,230), thickness=2)
+cv.putText(dummy, text="hello bro !",org=(0,100), fontFace=1, fontScale=-2, color=(0,124,230), thickness=2)
 cv.imshow("dum",dummy)
 
 cv.waitKey(0)

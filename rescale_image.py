@@ -21,8 +21,8 @@ rescale_image= rescale(img, 0.5)
 resize_image = cv.resize(img, (800,700), interpolation= cv.INTER_LINEAR)
 '''
 cv.INTER_AREA: For shrinking images.
-cv.INTER_LINEAR: For enlarging images.
-cv.INTER_CUBIC: For high-quality enlargements.
+cv.INTER_LINEAR: For enlarging images for zooming, default.
+cv.INTER_CUBIC: For high-quality enlargements. slow but efficient
 '''
 
 cv.imshow("orginal image", img)
