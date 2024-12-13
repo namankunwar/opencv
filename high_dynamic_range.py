@@ -52,7 +52,7 @@ plt.axis('off')
 plt.show()
 
 # Optional: Save the tonemapped image
-cv2.imwrite("tonemapped_hdr.jpg", ldr_image)
+cv2.imwrite("photos/tonemapped_hdr.jpg", ldr_image)
 
 # Parameters and Explanations
 # ----------------------------------------------
