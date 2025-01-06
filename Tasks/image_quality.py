@@ -1,7 +1,7 @@
 import cv2 as cv
 
 
-image =cv.imread("photos/good-image.jpg")
+image =cv.imread("photos/good-image2.jpg")
 
 if image is None:
         print(f"Error loading image: {image}")
