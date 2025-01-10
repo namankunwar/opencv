@@ -18,7 +18,6 @@ cordinates = (( ((index  - 1) // 7)*pixel_size, ((index - 1) % 7)*pixel_size) fo
 
 # sequential order
 for row, col in cordinates:
-    
     # Place the apple image at the calculated position (Slicing)
     blank_image[row:row + pixel_size, col:col + pixel_size] = apple_img
     
