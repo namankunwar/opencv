@@ -54,7 +54,7 @@ def draw_lines(image, start_coords, length1, angle1, angle2):
 
 image = np.zeros((500, 500, 3), dtype=np.uint8)
 
-result_image = draw_lines(image, start_coords= (100, 300)  , length1 = 150, angle1= 45  , angle2= 120 )
+result_image = draw_lines(image, start_coords= (100, 300)  , length1 = 150, angle1= 45  , angle2= 90 )
 
 cv.imshow("Connected Lines with Boundary", result_image)
 cv.waitKey(0)

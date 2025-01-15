@@ -1,6 +1,5 @@
 import numpy as np
 
-# Provided coordinates
 coordinates = [
     (0.0, 0.0), (1.7241379310344827, 0.0), (3.4482758620689653, 0.0), 
     (5.172413793103448, 0.0), (6.896551724137931, 0.0), (8.620689655172413, 0.0), 
@@ -29,19 +28,18 @@ coordinates = [
     (100.0, 250.0)
  ]
 
-# Step 1: Separate x and y values
+# Separate x and y values
 x_vals = np.array([coord[0] for coord in coordinates])
 y_vals = np.array([coord[1] for coord in coordinates])
 
-# Step 2: Find xmin, xmax, ymin, ymax
 xmin, xmax = x_vals.min(), x_vals.max()
 ymin, ymax = y_vals.min(), y_vals.max()
 
-# Step 3: Identify y-values at xmin and xmax
+#y-values at xmin and xmax
 y_at_xmin = y_vals[np.where(x_vals == xmin)[0][0]]
 y_at_xmax = y_vals[np.where(x_vals == xmax)[0][0]]
 
-# Step 4: Check trends
+#Check 
 if y_at_xmin < y_at_xmax:
     if y_vals[-1] > y_vals[0]:
         result = "Top-right  Curve"
@@ -53,5 +51,5 @@ else:
     else:
         result = "Bottom-Right (⅃) Curve"
 
-# Step 5: Output
+
 print(f"Detected Curve Shape: {result}")

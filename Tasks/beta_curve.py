@@ -2,28 +2,24 @@ import cv2
 import numpy as np
 
 def classify_logarithmic_L_shape(contour):
-    """
-    Classify the L-curve based on extreme points and y-value trends.
-    :param contour: Array of (x, y) points forming the contour.
-    :return: Curve type and turning point.
-    """
-    # Step 1: Extract and sort points
+  
+    # Extract and sort points
     points = np.squeeze(contour)  # Remove unnecessary dimensions
     points = np.array(points)  # Ensure points are in array form
 
-    # Step 2: Find x_max and x_min points
+    #  Find x_max and x_min points
     x_max_point = points[np.argmax(points[:, 0])]  # Point with max x
     x_min_point = points[np.argmin(points[:, 0])]  # Point with min x
 
-    # Step 3: Check y-value trends for x_max
+    # Check y-value trends for x_max
     x_max_index = np.argmax(points[:, 0])
     x_max_y_trend = "increasing" if points[x_max_index - 1, 1] < points[x_max_index, 1] else "decreasing"
 
-    # Step 4: Check y-value trends for x_min
+    #Check y-value trends for x_min
     x_min_index = np.argmin(points[:, 0])
     x_min_y_trend = "increasing" if points[x_min_index - 1, 1] < points[x_min_index, 1] else "decreasing"
 
-    # Step 5: Classify curve
+    # Classify curve
     if x_max_y_trend == "increasing":
         curve_type = "Bottom-left L-shape (L)"
     elif x_max_y_trend == "decreasing":
@@ -38,16 +34,16 @@ def classify_logarithmic_L_shape(contour):
     return curve_type
 
 
-# Example Workflow
-# Step 1: Create a test image with a logarithmic L-curve
+
+# Create a test image with a logarithmic L-curve
 image = np.zeros((500, 500), dtype=np.uint8)
 cv2.line(image, (50, 250), (250, 250), 255, 5)  # Horizontal segment
 cv2.line(image, (250, 250), (250, 450), 255, 5)  # Vertical segment
 
-# Step 2: Find contours
+# Find contours
 contours, _ = cv2.findContours(image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
-# Step 3: Process each contour
+#Process each contour
 for contour in contours:
     curve_type = classify_logarithmic_L_shape(contour)
     print(f"Curve Type: {curve_type}")
